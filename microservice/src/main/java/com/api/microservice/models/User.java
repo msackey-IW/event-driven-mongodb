@@ -31,6 +31,7 @@ public class User {
     @Column(name = "lastName")
     private String lastName;
 
+    @NonNull
     @Column(name = "age")
     private int age;
 
