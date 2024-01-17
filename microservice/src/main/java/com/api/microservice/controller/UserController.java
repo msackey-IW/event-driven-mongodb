@@ -15,11 +15,11 @@ import com.api.microservice.models.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user")
 public class UserController {
     private final UserServiceImpl userService;
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable String id) {
         System.out.println("I got here");
         return new ResponseEntity<>(userService.getUser(Integer.valueOf(id)), HttpStatus.OK);

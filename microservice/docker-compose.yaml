@@ -1,0 +1,110 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/admin
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - app-net
+      - kong-net
+  db:
+    image: 'postgres:13.1-alpine'
+    restart: always
+    container_name: db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - db:/var/lib/postgres
+    networks:
+      - app-net
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@ecommerce.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - app-net
+      
+  postgres:
+    image: "postgres:13"
+    container_name: "kong-database"
+    hostname: kong-gateway
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "kong"
+      POSTGRES_DB: "kong"
+      POSTGRES_PASSWORD: "kongpass"
+    restart: always
+
+
+  kong-migrations-bootstrap:
+    image: kong/kong-gateway:latest  # this line may need to be updated
+    environment:
+      KONG_DATABASE: "postgres"
+      KONG_PG_HOST: "kong-database"
+      KONG_PG_PASSWORD: "kongpass"
+      KONG_PASSWORD: "test"
+    command: "kong migrations bootstrap"
+    restart: "on-failure"
+    container_name: kong-migrations-bootstrap
+    hostname: kong-migrations-bootstrap
+
+
+  kong-gateway:
+    image: kong/kong-gateway:latest
+    command: "kong start"
+    hostname: kong-gateway
+    container_name: kong-gateway
+    depends_on:
+      - kong-migrations-bootstrap
+    environment:
+      KONG_DATABASE: "postgres"
+      KONG_PG_HOST: "kong-database"
+      KONG_PG_USER:  "kong"
+      KONG_PG_PASSWORD: "kongpass"
+      KONG_PROXY_ACCESS_LOG: "/dev/stdout"
+      KONG_ADMIN_ACCESS_LOG: "/dev/stdout"
+      KONG_PROXY_ERROR_LOG: "/dev/stderr"
+      KONG_ADMIN_ERROR_LOG: "/dev/stderr"
+      KONG_ADMIN_LISTEN: "0.0.0.0:8001, 0.0.0.0:8444 ssl"
+      KONG_ADMIN_GUI_URL: "http://localhost:8002"
+    restart: "on-failure"
+    ports:
+      - "8000:8000"
+      - "8443:8443"
+      - "8001:8001"
+      - "8444:8444"
+      - "8002:8002"
+      - "8445:8445"
+      - "8003:8003"
+      - "8004:8004"
+    volumes:
+      - ./kong.yaml:/etc/kong/kong.yaml
+
+networks:
+  app-net:
+  kong-net:
+  
+
+volumes:
+  db:
+  kong-database:
