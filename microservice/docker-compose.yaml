@@ -97,6 +97,8 @@ services:
       - "8445:8445"
       - "8003:8003"
       - "8004:8004"
+    volumes:
+      - ./kong.yaml:/etc/kong/kong.yaml
 
 networks:
   app-net:
