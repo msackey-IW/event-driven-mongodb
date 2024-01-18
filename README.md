@@ -46,7 +46,7 @@ This data automatically populates the database when the application starts.
 - The application comes with a preloaded kong service to retrieve user information. 
 - However, more services may be attached as required. Visit the Kong [official docs](https://docs.konghq.com/gateway/latest/get-started/services-and-routes/) to learn more about creating services and routes.
 - All services can be viewed at `http://localhost:8001/services`
-- Routes related to a service may be viewed at `http://localhost:8002/services/YOUR-SERVICE-NAME/routes`
+- Routes related to a service may be viewed at `http://localhost:8001/services/YOUR-SERVICE-NAME/routes`
 ## TESTING THE APPLICATION
 - Open Postman API
 - Create a new "GET Request" by navigation to `new -> Http -> GET`.
