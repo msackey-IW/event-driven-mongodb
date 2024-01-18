@@ -1,0 +1,9 @@
+_format_version: "2.1"
+services:
+- name: user-details-services
+  url: http://host.docker.internal:8080
+  routes:
+  - name: user-details
+    paths:
+    - "/user/(?<id>[^/]+)"
+    strip_path: false
