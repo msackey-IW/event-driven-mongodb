@@ -16,7 +16,7 @@ This data automatically populates the database when the application starts.
 - A Web Browser ( [Google Chrome](https://www.google.com/chrome/) or [FireFox](https://www.mozilla.org/en-US/firefox/new/))
 - [Java](https://www.oracle.com/java/technologies/downloads/) 17 at minimum installed on your local machine.
 - [Git](https://www.git-scm.com/downloads)
-- [Apache Maven]()
+- [Apache Maven](https://maven.apache.org/)
 
 ## Setting Up - CLONE THE PROJECT
 - Open a terminal or command prompt (Powershell on Windows and Terminal or linux or macOS)
@@ -45,9 +45,20 @@ This data automatically populates the database when the application starts.
 ## KONG API GATEWAY
 - The application comes with a preloaded kong service to retrieve user information. 
 - However, more services may be attached as required. Visit the Kong [official docs](https://docs.konghq.com/gateway/latest/get-started/services-and-routes/) to learn more about creating services and routes.
-
+- All services can be viewed at `http://localhost:8001/services`
+- Routes related to a service may be viewed at `http://localhost:8002/services/YOUR-SERVICE-NAME/routes`
 ## TESTING THE APPLICATION
 - Open Postman API
 - Create a new "GET Request" by navigation to `new -> Http -> GET`.
 - In the url tab, enter `http://localhost:8000/user/{id}` where the id is a dynamic integer referencing the user id to be retrieved.
 - A sample request to `http://localhost:8000/user/1` will return the output below
+```json
+{
+    "id": 1,
+    "firstName": "Teodorico",
+    "lastName": "Skaife d'Ingerthorpe",
+    "age": 18,
+    "sex": "Male"
+}
+
+```
