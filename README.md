@@ -23,11 +23,11 @@ This data automatically populates the database when the application starts.
 - Navigate to the directory you want to clone the project. e.g. `cd path/to/your/directory`
 - Run `git clone git@github.com:msackey-IW/springboot-kong-microservice.git`
 - Alternatively, in the [project repository](https://github.com/msackey-IW/springboot-kong-microservice) you can navigate to `code -> Open with GitHub Desktop` and clone the repository through GitHub Desktop.
-- Run `mvn clean package` - This packages the springboot application into a .jar file.
-- Run `docker-compose up` - This creates and runs the microservice from the .jar file.
+- Run `mvn clean package` in the terminal - This packages the springboot application into a .jar file.
+- Run `docker-compose up` in the terminal - This creates and runs the microservice from the .jar file.
 - The endpoints are exposed via a kong gateway through the following url `http://localhost:8000/user/{id}`. 
 - The id is field is a dynamic resource and returns all information attached to the user with the specified id.
-- The database can be accessed through [PGADMIN4](http://localhost:5050). The default username and password for this service is available at `microservice/docker-compose.yaml`
+- The database can be accessed through [PGADMIN4](http://localhost:5050). The default username and password for this service is available at `microservice/docker-compose.yaml` associated with environment variables "PGADMIN_DEFAULT_EMAIL" and "PGADMIN_DEFAULT_PASSWORD".
 - The default login credentials for the database are available in `microservice/docker-compose.yaml`
 
 ## Setting Up - DOWNLOAD THE PROJECT
@@ -51,6 +51,7 @@ This data automatically populates the database when the application starts.
 - Open Postman API
 - Create a new "GET Request" by navigation to `new -> Http -> GET`.
 - In the url tab, enter `http://localhost:8000/user/{id}` where the id is a dynamic integer referencing the user id to be retrieved.
+- The id field must be a valid positive integer
 - A sample request to `http://localhost:8000/user/1` will return the output below
 ```json
 {

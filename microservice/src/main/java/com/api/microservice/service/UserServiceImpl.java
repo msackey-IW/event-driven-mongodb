@@ -16,11 +16,11 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepo;
 
     @Override
-    public User getUser(int id) {
+    public User getUser(Long id) {
         return unWrapUser(userRepo.getUserById(id), id);
     }
 
-    public static User unWrapUser(Optional<User> user, int id) {
+    public static User unWrapUser(Optional<User> user, Long id) {
         User u = user.orElse(null);
         if (u == null) {
             throw new UserNotFoundException(id);

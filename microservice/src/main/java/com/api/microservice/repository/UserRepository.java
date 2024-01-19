@@ -7,6 +7,6 @@ import com.api.microservice.models.User;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
-    Optional<User> getUserById(int id);
+public interface UserRepository extends CrudRepository<User, Long> {
+    Optional<User> getUserById(Long id);
 }
