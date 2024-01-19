@@ -45,6 +45,7 @@ This data automatically populates the database when the application starts.
 ## KONG API GATEWAY
 - The application comes with a preloaded kong service to retrieve user information. 
 - However, more services may be attached as required. Visit the Kong [official docs](https://docs.konghq.com/gateway/latest/get-started/services-and-routes/) to learn more about creating services and routes.
+- The Kong GUI can be viewed at `http://localhost:8002`.
 - All services can be viewed at `http://localhost:8001/services`
 - Routes related to a service may be viewed at `http://localhost:8001/services/YOUR-SERVICE-NAME/routes`
 ## TESTING THE APPLICATION
