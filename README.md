@@ -35,7 +35,7 @@ This data automatically populates the database when the application starts.
 - Download the application [here](git@github.com:msackey-IW/springboot-kong-microservice.git) by navigating to `code -> download ZIP`.
 - Unzip the folder and open the extracted files in your downloaded IDE(Intellij or VSCode).
 - In your IDE terminal, navigate to the eCommerce folder using the command `cd eCommerce`.
-- Run `mvn clean package` - This packages the springboot application into a .jar file.
+- Run `mvn clean package -DskipTests` - This packages the springboot application into a .jar file.
 - Run `docker-compose up` - This creates and runs the microservice from the .jar file.
 - The endpoints are exposed via a kong gateway through the following url `http://localhost:8000/user/{id}`.
 - The id is field is a dynamic resource and returns all information attached to the user with the specified id.
