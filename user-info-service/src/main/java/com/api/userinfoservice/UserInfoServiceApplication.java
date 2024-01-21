@@ -1,4 +1,4 @@
-package com.api.microservice;
+package com.api.UserInfoService;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ClassPathResource;
 
-import com.api.microservice.models.User;
-import com.api.microservice.service.UserServiceImpl;
+import com.api.UserInfoService.models.User;
+import com.api.UserInfoService.service.UserServiceImpl;
 
 import lombok.AllArgsConstructor;
 
@@ -20,11 +20,11 @@ import java.util.List;
 
 @AllArgsConstructor
 @SpringBootApplication
-public class MicroserviceApplication implements CommandLineRunner{
+public class UserInfoServiceApplication implements CommandLineRunner{
     private final UserServiceImpl userService;
 
 	public static void main(String[] args){
-		SpringApplication.run(MicroserviceApplication.class, args);
+		SpringApplication.run(UserInfoServiceApplication.class, args);
  
 		
 	}

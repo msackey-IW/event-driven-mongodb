@@ -1,4 +1,4 @@
-package com.api.microservice.models;
+package com.api.UserInfoService.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

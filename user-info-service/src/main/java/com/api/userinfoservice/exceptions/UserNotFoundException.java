@@ -1,4 +1,4 @@
-package com.api.microservice.exceptions;
+package com.api.UserInfoService.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(Long id) {

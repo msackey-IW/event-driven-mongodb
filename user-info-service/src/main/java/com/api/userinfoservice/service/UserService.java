@@ -1,6 +1,6 @@
-package com.api.microservice.service;
+package com.api.UserInfoService.service;
 
-import com.api.microservice.models.User;
+import com.api.UserInfoService.models.User;
 
 public interface UserService {
     User getUser(Long id);

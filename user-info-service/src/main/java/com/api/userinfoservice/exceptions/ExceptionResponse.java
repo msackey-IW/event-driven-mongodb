@@ -1,4 +1,4 @@
-package com.api.microservice.exceptions;
+package com.api.UserInfoService.exceptions;
 
 import java.time.LocalDateTime;
 

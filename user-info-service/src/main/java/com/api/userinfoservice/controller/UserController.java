@@ -1,8 +1,8 @@
-package com.api.microservice.controller;
+package com.api.UserInfoService.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.microservice.service.UserServiceImpl;
+import com.api.UserInfoService.service.UserServiceImpl;
 
 import lombok.AllArgsConstructor;
 
@@ -12,8 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.api.microservice.exceptions.InvalidArgumentException;
-import com.api.microservice.models.*;
+import com.api.UserInfoService.exceptions.InvalidArgumentException;
+import com.api.UserInfoService.models.*;
 
 @AllArgsConstructor
 @RestController

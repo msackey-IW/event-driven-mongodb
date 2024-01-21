@@ -8,11 +8,11 @@
 		<version>3.2.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.api</groupId>
-	<artifactId>microservice</artifactId>
+	<groupId>com.api.UserInfoService</groupId>
+	<artifactId>user-info-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>user-info-microservice</name>
-	<description>microservice</description>
+	<name>user-info-service</name>
+	<description>User Information microservice</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
