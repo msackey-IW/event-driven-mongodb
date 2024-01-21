@@ -31,18 +31,6 @@ This data automatically populates the database when the application starts.
 - The database can be accessed through [PGADMIN4](http://localhost:5050). The default username and password for this service is available at `user-info-microservice/docker-compose.yaml` associated with environment variables "PGADMIN_DEFAULT_EMAIL" and "PGADMIN_DEFAULT_PASSWORD".
 - The default login credentials for the database are available in `user-info-microservice/docker-compose.yaml`
 
-## Setting Up - DOWNLOAD THE PROJECT
-- Open and run Docker on your machine.
-- Download the application [here](https://github.com/msackey-IW/user-info-microservice) by navigating to `code -> download ZIP`.
-- Unzip the folder and open the extracted files in your downloaded IDE(Intellij or VSCode).
-- In your IDE terminal, navigate to the eCommerce folder using the command `cd user-info-microservice`.
-- Run `mvn clean package -DskipTests` - This packages the springboot application into a .jar file.
-- Run `docker-compose up` - This creates and runs the microservice from the .jar file.
-- The endpoints are exposed via a kong gateway through the following url `http://localhost:8000/user/{id}`.
-- The id is field is a dynamic resource and returns all information attached to the user with the specified id.
-- The database can be accessed through [PGADMIN4](http://localhost:5050). The default username and password for this service is available at `user-info-microservice/docker-compose.yaml`
-- The default login credentials for the database are available in `user-info-microservice/docker-compose.yaml`
-
 ## KONG API GATEWAY
 - The application comes with a preloaded kong service to retrieve user information. 
 - However, more services may be attached as required. Visit the Kong [official docs](https://docs.konghq.com/gateway/latest/get-started/services-and-routes/) to learn more about creating services and routes.
