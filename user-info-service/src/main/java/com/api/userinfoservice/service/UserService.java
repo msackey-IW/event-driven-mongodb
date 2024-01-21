@@ -1,6 +1,6 @@
-package com.api.UserInfoService.service;
+package com.api.userinfoservice.service;
 
-import com.api.UserInfoService.models.User;
+import com.api.userinfoservice.models.User;
 
 public interface UserService {
     User getUser(Long id);

@@ -1,4 +1,4 @@
-package com.api.UserInfoService;
+package com.api.userinfoservice;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ClassPathResource;
 
-import com.api.UserInfoService.models.User;
-import com.api.UserInfoService.service.UserServiceImpl;
+import com.api.userinfoservice.models.User;
+import com.api.userinfoservice.service.UserServiceImpl;
 
 import lombok.AllArgsConstructor;
 

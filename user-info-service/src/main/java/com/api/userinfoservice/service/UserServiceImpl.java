@@ -1,12 +1,12 @@
-package com.api.UserInfoService.service;
+package com.api.userinfoservice.service;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.api.UserInfoService.exceptions.UserNotFoundException;
-import com.api.UserInfoService.models.User;
-import com.api.UserInfoService.repository.UserRepository;
+import com.api.userinfoservice.exceptions.UserNotFoundException;
+import com.api.userinfoservice.models.User;
+import com.api.userinfoservice.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
 

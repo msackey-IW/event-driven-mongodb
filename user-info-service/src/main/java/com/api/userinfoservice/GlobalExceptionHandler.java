@@ -1,3 +1,4 @@
+package com.api.userinfoservice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -5,9 +6,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.Collections;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.api.UserInfoService.exceptions.ExceptionResponse;
-import com.api.UserInfoService.exceptions.InvalidArgumentException;
-import com.api.UserInfoService.exceptions.UserNotFoundException;
+import com.api.userinfoservice.exceptions.ExceptionResponse;
+import com.api.userinfoservice.exceptions.InvalidArgumentException;
+import com.api.userinfoservice.exceptions.UserNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{

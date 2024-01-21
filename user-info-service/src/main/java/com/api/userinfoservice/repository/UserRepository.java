@@ -1,9 +1,9 @@
-package com.api.UserInfoService.repository;
+package com.api.userinfoservice.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.api.UserInfoService.models.User;
+import com.api.userinfoservice.models.User;
 import java.util.Optional;
 
 @Repository

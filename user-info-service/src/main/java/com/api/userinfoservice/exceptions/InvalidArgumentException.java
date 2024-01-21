@@ -1,4 +1,4 @@
-package com.api.UserInfoService.exceptions;
+package com.api.userinfoservice.exceptions;
 
 public class InvalidArgumentException extends RuntimeException {
     public InvalidArgumentException(String id) {
