@@ -6,7 +6,7 @@ It uses the KONG API GATEWAY to abstract away the microservice itself,
 such that all requests are made to
 the Kong Gateway which then redirects it to the springboot application.
 The Kong API GUI can be accessed [here](http://localhost:8002) once the application is running.
-The data for the application was generated from [Mockaroo](https://www.mockaroo.com/) and is available as a CSV at `microservice/src/main/resources/MOCK_DATA.csv`
+The data for the application was generated from [Mockaroo](https://www.mockaroo.com/) and is available as a CSV at `user-info-microservice/src/main/resources/MOCK_DATA.csv`
 This data automatically populates the database when the application starts.
 
 ## REQUIRED SOFTWARE
@@ -21,26 +21,27 @@ This data automatically populates the database when the application starts.
 ## Setting Up - CLONE THE PROJECT
 - Open a terminal or command prompt (Powershell on Windows and Terminal or linux or macOS)
 - Navigate to the directory you want to clone the project. e.g. `cd path/to/your/directory`
-- Run `git clone git@github.com:msackey-IW/springboot-kong-microservice.git`
-- Alternatively, in the [project repository](https://github.com/msackey-IW/springboot-kong-microservice) you can navigate to `code -> Open with GitHub Desktop` and clone the repository through GitHub Desktop.
+- Run `git clone git@github.com:msackey-IW/user-info-microservice.git`
+- Alternatively, in the [project repository](https://github.com/msackey-IW/user-info-microservice) you can navigate to `code -> Open with GitHub Desktop` and clone the repository through GitHub Desktop.
+- Run `cd user-info-microservice`.
 - Run `mvn clean package` in the terminal - This packages the springboot application into a .jar file.
 - Run `docker-compose up` in the terminal - This creates and runs the microservice from the .jar file.
 - The endpoints are exposed via a kong gateway through the following url `http://localhost:8000/user/{id}`. 
 - The id is field is a dynamic resource and returns all information attached to the user with the specified id.
-- The database can be accessed through [PGADMIN4](http://localhost:5050). The default username and password for this service is available at `microservice/docker-compose.yaml` associated with environment variables "PGADMIN_DEFAULT_EMAIL" and "PGADMIN_DEFAULT_PASSWORD".
-- The default login credentials for the database are available in `microservice/docker-compose.yaml`
+- The database can be accessed through [PGADMIN4](http://localhost:5050). The default username and password for this service is available at `user-info-microservice/docker-compose.yaml` associated with environment variables "PGADMIN_DEFAULT_EMAIL" and "PGADMIN_DEFAULT_PASSWORD".
+- The default login credentials for the database are available in `user-info-microservice/docker-compose.yaml`
 
 ## Setting Up - DOWNLOAD THE PROJECT
 - Open and run Docker on your machine.
-- Download the application [here](git@github.com:msackey-IW/springboot-kong-microservice.git) by navigating to `code -> download ZIP`.
+- Download the application [here](https://github.com/msackey-IW/user-info-microservice) by navigating to `code -> download ZIP`.
 - Unzip the folder and open the extracted files in your downloaded IDE(Intellij or VSCode).
-- In your IDE terminal, navigate to the eCommerce folder using the command `cd eCommerce`.
+- In your IDE terminal, navigate to the eCommerce folder using the command `cd user-info-microservice`.
 - Run `mvn clean package -DskipTests` - This packages the springboot application into a .jar file.
 - Run `docker-compose up` - This creates and runs the microservice from the .jar file.
 - The endpoints are exposed via a kong gateway through the following url `http://localhost:8000/user/{id}`.
 - The id is field is a dynamic resource and returns all information attached to the user with the specified id.
-- The database can be accessed through [PGADMIN4](http://localhost:5050). The default username and password for this service is available at `microservice/docker-compose.yaml`
-- The default login credentials for the database are available in `microservice/docker-compose.yaml`
+- The database can be accessed through [PGADMIN4](http://localhost:5050). The default username and password for this service is available at `user-info-microservice/docker-compose.yaml`
+- The default login credentials for the database are available in `user-info-microservice/docker-compose.yaml`
 
 ## KONG API GATEWAY
 - The application comes with a preloaded kong service to retrieve user information. 
@@ -62,5 +63,4 @@ This data automatically populates the database when the application starts.
     "age": 18,
     "sex": "Male"
 }
-
 ```
