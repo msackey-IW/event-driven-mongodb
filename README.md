@@ -33,9 +33,18 @@ git clone git@github.com:msackey-IW/user-info-service.git
 ```powershell
 cd user-info-service
 ```
-- Run the code snippet below in the terminal.
+- Run the code snippet below in the terminal based on your operating system.
 ```powershell
+<# Linux/MacOs #>
+mvn clean package -DskipTests
+OR
 ./mvn clean package -DskipTests
+
+<# Windows #>
+mvn clean package -DskipTests
+OR
+.\mvn clean package -DskipTests 
+
 ```
 The above packages the springboot application into a .jar file.
 
