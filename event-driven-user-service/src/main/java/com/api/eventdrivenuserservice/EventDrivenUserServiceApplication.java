@@ -1,5 +1,6 @@
 package com.api.eventdrivenuserservice;
 
+import com.api.eventdrivenuserservice.model.User;
 import com.api.eventdrivenuserservice.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -22,35 +23,8 @@ public class EventDrivenUserServiceApplication implements CommandLineRunner {
 	}
 	@Override
 	public void run(String... args) {
-		try {
-			Resource resource = new ClassPathResource("MOCK_DATA.csv");
-			parseCsvFile(resource);
-		} catch (IOException e) {
-
-		}
+		
 	}
 
-	private void parseCsvFile(Resource resource) throws IOException {
-		try (InputStreamReader reader = new InputStreamReader(resource.getInputStream());
-			 CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withHeader())) {
 
-			List<CSVRecord> csvRecords = csvParser.getRecords();
-
-			for (CSVRecord csvRecord : csvRecords) {
-				try {
-					String firstName = csvRecord.get("first_name");
-					String lastName = csvRecord.get("last_name");
-					int age = Integer.parseInt(csvRecord.get("age"));
-					String sex = csvRecord.get("sex");
-
-					User user = new User(firstName, lastName, age, sex);
-					userService.addUser(user);
-				} catch (NumberFormatException e) {
-
-				}
-			}
-
-
-		}
-	}
 }
