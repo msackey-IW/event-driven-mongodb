@@ -87,7 +87,7 @@ public class PersonTopicPublisher {
        
                // Send the message
                // NOTE: JMS Message Priority is not supported by the Solace Message Bus
-               messageProducer.send(topic, message, DeliveryMode.NON_PERSISTENT,
+               messageProducer.send(topic, message, DeliveryMode.PERSISTENT,
                        Message.DEFAULT_PRIORITY, Message.DEFAULT_TIME_TO_LIVE);
                System.out.println("Published Person Successfully.");
            } catch (NumberFormatException e) {
