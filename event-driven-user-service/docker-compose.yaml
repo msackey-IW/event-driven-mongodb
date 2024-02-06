@@ -15,9 +15,6 @@ services:
       - "8080:8080"
     depends_on:
       - db
-      - solace
-    networks:
-      - app-net
   db:
     image: 'postgres:13.1-alpine'
     restart: always
@@ -27,8 +24,16 @@ services:
       POSTGRES_PASSWORD: admin
     volumes:
       - db:/var/lib/postgres
-    networks:
-      - app-net
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@ecommerce.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
 
   solace:
     container_name: solace

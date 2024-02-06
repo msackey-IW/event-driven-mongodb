@@ -1,7 +1,20 @@
 package com.api.eventdrivenuserservice;
 
+import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
+import org.springframework.boot.SpringApplication;
+
+import com.api.eventdrivenuserservice.model.User;
+import com.api.eventdrivenuserservice.repository.UserRepository;
+import com.api.eventdrivenuserservice.service.UserService;
+import com.api.eventdrivenuserservice.service.UserServiceImpl;
 import com.solacesystems.jms.SolConnectionFactory;
 import com.solacesystems.jms.SolJmsUtility;
 import jakarta.jms.Connection;
@@ -13,8 +26,17 @@ import jakarta.jms.Session;
 import jakarta.jms.TextMessage;
 import jakarta.jms.Topic;
 
+
+@Component
+@ComponentScan(basePackages = {"com.api.eventdrivenuserservice", "com.api.eventdrivenuserservice.service"})
 public class PersonTopicSubscriber {
     
+    private final UserService userService;
+
+    public PersonTopicSubscriber(UserService userService) {
+        this.userService = userService;
+    }
+
     final String TOPIC_NAME = "Topic/Person/Add";
 
     // Latch used for synchronizing between threads
@@ -38,6 +60,7 @@ public class PersonTopicSubscriber {
         connectionFactory.setPassword(password);
         Connection connection = connectionFactory.createConnection();
 
+
         // Create a non-transacted, Auto ACK session.
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
@@ -56,11 +79,21 @@ public class PersonTopicSubscriber {
             public void onMessage(Message message) {
                 try {
                     if (message instanceof TextMessage) {
-                        System.out.printf("TextMessage received: '%s'%n", ((TextMessage) message).getText());
+                        String myMessage = ((TextMessage) message).getText();
+                        String[] userDetails =  (((TextMessage)message).getText()).split(",", 6);
+                        User user =  new User(
+                            userDetails[0],
+                            userDetails[1],
+                            Integer.valueOf(userDetails[2]),
+                            userDetails[3]
+                        );
+                        userService.addUser(user);
+                        System.out.printf("TextMessage received: '%s'%n ", myMessage);
+                        System.out.println(userDetails[0] + " successfully added to database.");
                     } else {
                         System.out.println("Message received.");
                     }
-                    System.out.printf("Message Content:%n%s%n", SolJmsUtility.dumpMessage(message));
+                    
                     latch.countDown(); // unblock the main thread
                 } catch (JMSException ex) {
                     System.out.println("Error processing incoming message.");
@@ -101,6 +134,6 @@ public class PersonTopicSubscriber {
             System.out.println();
             System.exit(-1);
         }
-        new PersonTopicSubscriber().run(args);
+       
     }
 }
