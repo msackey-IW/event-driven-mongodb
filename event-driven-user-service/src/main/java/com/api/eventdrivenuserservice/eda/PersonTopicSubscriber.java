@@ -1,20 +1,11 @@
-package com.api.eventdrivenuserservice;
+package com.api.eventdrivenuserservice.eda;
 
-import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
-import org.springframework.boot.SpringApplication;
 
 import com.api.eventdrivenuserservice.model.User;
-import com.api.eventdrivenuserservice.repository.UserRepository;
 import com.api.eventdrivenuserservice.service.UserService;
-import com.api.eventdrivenuserservice.service.UserServiceImpl;
 import com.solacesystems.jms.SolConnectionFactory;
 import com.solacesystems.jms.SolJmsUtility;
 import jakarta.jms.Connection;
@@ -105,6 +96,8 @@ public class PersonTopicSubscriber {
         // Start receiving messages
         connection.start();
         System.out.println("Awaiting message...");
+        PersonTopicPublisher publisher = new PersonTopicPublisher();
+		publisher.run("host.docker.internal:55554", "admin@default", "admin");
         // the main thread blocks at the next statement until a message received
         latch.await();
 

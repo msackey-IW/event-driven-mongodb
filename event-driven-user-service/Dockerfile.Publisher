@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY . .
 
-CMD ["./mvnw", "clean", "spring-boot:run"]
+CMD ["./mvnw", "clean", "install", "exec:java@publisher"]
 
 
 

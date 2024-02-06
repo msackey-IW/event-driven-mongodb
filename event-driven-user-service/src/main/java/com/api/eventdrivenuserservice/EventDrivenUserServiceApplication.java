@@ -1,6 +1,8 @@
 package com.api.eventdrivenuserservice;
 
 
+import com.api.eventdrivenuserservice.eda.PersonTopicPublisher;
+import com.api.eventdrivenuserservice.eda.PersonTopicSubscriber;
 import com.api.eventdrivenuserservice.service.UserService;
 import com.api.eventdrivenuserservice.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
@@ -29,8 +31,7 @@ public class EventDrivenUserServiceApplication implements CommandLineRunner {
          
          // Run the subscriber
          subscriber.run("host.docker.internal:55554", "admin@default", "admin");
-		PersonTopicPublisher publisher = new PersonTopicPublisher();
-		publisher.run("localhost:55554", "admin@default", "admin");
+
 
 	}
 	@Override

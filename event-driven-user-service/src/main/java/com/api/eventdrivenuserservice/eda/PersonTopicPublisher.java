@@ -1,4 +1,4 @@
-package com.api.eventdrivenuserservice;
+package com.api.eventdrivenuserservice.eda;
 
 import jakarta.jms.Connection;
 import jakarta.jms.DeliveryMode;
