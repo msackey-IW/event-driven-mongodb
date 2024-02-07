@@ -53,7 +53,7 @@ http://localhost:5050
 - In the password field, input `admin`.
 - Click the `save` button.
 - On the left panel, navigate to `Postgres DB -> Databases -> admin`.
-- In the top menu, click on `Tools -> Query Tool`.
+- In the top menu, navigate to `Tools -> Query Tool`.
 - In the now created query box, input the SQL command below.
 ```sql
 SELECT * FROM users;
