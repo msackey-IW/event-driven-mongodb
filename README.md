@@ -67,5 +67,9 @@ http://localhost:5050
 SELECT * FROM users;
 ```
 - The query should output all the users who have been successfully added the database.
+- Run the command below to close down all running docker containers.
+  ```bash
+  docker-compose down
+  ```
 
 
