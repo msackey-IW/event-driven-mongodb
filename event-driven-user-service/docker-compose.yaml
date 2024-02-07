@@ -96,8 +96,6 @@ services:
       - '9443:9443'
       #SMF
       - '55554:55555'
-      #SMF Compressed
-      - '55003:55003'
       #SMF over TLS
       - '55443:55443'
       #SSH connection to CLI
