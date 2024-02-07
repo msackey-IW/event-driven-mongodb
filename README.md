@@ -6,14 +6,6 @@ This repository uses event driven architecture to allow users to be added to a d
 ## SOLACE
 Solace is an event broker that enables message-oriented middleware services that routes information between applications, devices and user interfaces. Learn more about solace and how it functions by visiting their [official docs](https://docs.solace.com/).
 
-## REQUIRED SOFTWARE
-- An IDE ( [Visual Studio Code](https://code.visualstudio.com/download) or [intellij IDEA](https://www.jetbrains.com/idea/download/?source=google&medium=cpc&campaign=APAC_en_AU_IDEA_Branded&term=intellij+idea&content=602143185772&gclid=EAIaIQobChMI-f3uuYnegwMVwqRmAh0_ewXKEAAYASABEgImY_D_BwE&section=windows) )
-- [Docker](https://www.docker.com/products/docker-desktop/)
-- [Postman API](https://www.postman.com/downloads/)
-- A Web Browser ( [Google Chrome](https://www.google.com/chrome/) or [FireFox](https://www.mozilla.org/en-US/firefox/new/))
-- [Java](https://www.oracle.com/java/technologies/downloads/) 17 at minimum installed on your local machine.
-- [Git](https://www.git-scm.com/downloads)
-- [Apache Maven](https://maven.apache.org/)
 
 ## SETTING UP - CLONE THE PROJECT
 - Ensure you have Docker up and running.
