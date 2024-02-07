@@ -38,7 +38,7 @@ docker-compose up -d
 - The above command creates 2 event driven microservices(publisher and subscriber), solace, a postgeSQL database and pgAdmin to access the postgres db. 
 - The publisher fires a list of user details to the topic `Topic/People/Add` to which the consumer subscribes.
 - The subscriber then takes all the data and persists it in the posgresSQL database.
-
+- Due to the size fo the images, the application may take some time to get up and running. Allow for up to 10 minutes.
 
 ## TESTING THE APPLICATION
 
