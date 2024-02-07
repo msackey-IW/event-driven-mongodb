@@ -1,20 +1,17 @@
 version: '3.3'
 
 services:
-  app:
+  publisher:
     build:
       context: ./
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.Publisher
     restart: on-failure
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/admin
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
     ports:
-      - "8080:8080"
+      - "9090:9090"
     depends_on:
       - db
+      - subscriber
+
   db:
     image: 'postgres:13.1-alpine'
     restart: always
@@ -24,6 +21,9 @@ services:
       POSTGRES_PASSWORD: admin
     volumes:
       - db:/var/lib/postgres
+    depends_on:
+      - solace
+  
   pgadmin:
     image: dpage/pgadmin4:latest
     restart: always
@@ -35,6 +35,22 @@ services:
     depends_on:
       - db
 
+  subscriber:
+      build:
+        context: ./
+        dockerfile: ./Dockerfile.Subscriber
+      restart: on-failure
+      environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/admin
+        SPRING_DATASOURCE_USERNAME: admin
+        SPRING_DATASOURCE_PASSWORD: admin
+        SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      ports:
+        - "8080:8080"
+      depends_on:
+        - db
+      
+      
   solace:
     container_name: solace
     image: solace/solace-pubsub-standard:latest

@@ -96,19 +96,17 @@ public class PersonTopicSubscriber {
         // Start receiving messages
         connection.start();
         System.out.println("Awaiting message...");
+
+        // Call the publisher to send messages
         PersonTopicPublisher publisher = new PersonTopicPublisher();
 		publisher.run("host.docker.internal:55554", "admin@default", "admin");
         // the main thread blocks at the next statement until a message received
-        latch.await();
+    
 
-        connection.stop();
-        // Close everything in the order reversed from the opening order
-        // NOTE: as the interfaces below extend AutoCloseable,
-        // with them it's possible to use the "try-with-resources" Java statement
-        // see details at https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
-        messageConsumer.close();
-        session.close();
-        connection.close();
+          // Keep the application running until manually stopped
+        while (true) {
+            Thread.sleep(1000); // Sleep for 1 second to avoid consuming CPU
+        }
     }
 
     public static void main(String... args) throws Exception {

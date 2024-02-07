@@ -1,7 +1,6 @@
 package com.api.eventdrivenuserservice;
 
 
-import com.api.eventdrivenuserservice.eda.PersonTopicPublisher;
 import com.api.eventdrivenuserservice.eda.PersonTopicSubscriber;
 import com.api.eventdrivenuserservice.service.UserService;
 import com.api.eventdrivenuserservice.service.UserServiceImpl;

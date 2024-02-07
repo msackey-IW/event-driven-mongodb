@@ -266,9 +266,9 @@
                         <goal>java</goal>
                     </goals>
                     <configuration>
-                        <mainClass>com.api.eventdrivenuserservice.PersonTopicPublisher</mainClass>
+                        <mainClass>com.api.eventdrivenuserservice.eda.PersonTopicPublisher</mainClass>
                         <arguments>
-                            <argument>localhost:55554</argument>
+                            <argument>host.docker.internal:55554</argument>
                             <argument>admin@default</argument>
                             <argument>default</argument>
                         </arguments>
@@ -282,7 +282,7 @@
                         <goal>java</goal>
                     </goals>
                     <configuration>
-                        <mainClass>com.api.eventdrivenuserservice.PersonTopicSubscriber</mainClass>
+                        <mainClass>com.api.eventdrivenuserservice.eda.PersonTopicSubscriber</mainClass>
                         <arguments>
                             <argument>host.docker.internal:55554</argument>
                             <argument>admin@default</argument>

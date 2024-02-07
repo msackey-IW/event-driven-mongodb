@@ -16,6 +16,7 @@ Solace is an event broker that enables message-oriented middleware services that
 - [Apache Maven](https://maven.apache.org/)
 
 ## SETTING UP - CLONE THE PROJECT
+- Ensure you have Docker up and running.
 - Open a terminal or command prompt (Powershell on Windows and Terminal or linux or macOS)
 - Navigate to the directory in which you want to clone the project as shown below
 ```powershell
@@ -30,42 +31,41 @@ git clone git@github.com:msackey-IW/event-driven-user-service.git
 ```powershell
 cd event-driven-user-service
 ```
-- Run the code snippet below in the terminal based on your operating system.
-```powershell
-<# Linux/MacOs #>
-mvn clean package -DskipTests
-OR
-./mvnw clean package -DskipTests
-
-<# Windows #>
-mvn clean package -DskipTests
-OR
-.\mvnw clean package -DskipTests 
-
-```
-The above packages the springboot application into a .jar file.
-
 - Run the code snippet below in your terminal.
 ```powershell
 docker-compose up -d
 ```
-The above creates and runs the microservice from the .jar file in detached mode.
+- The above command creates 2 event driven microservices(publisher and subscriber), solace, a postgeSQL database and pgAdmin to access the postgres db. 
+- The publisher fires a list of user details to the topic `Topic/People/Add` to which the consumer subscribes.
+- The subscriber then takes all the data and persists it in the posgresSQL database.
+
 
 ## TESTING THE APPLICATION
 
-- Open the solace graphical user interface using the url below.
+- Open the pgAdmin graphical user interface by navigating to the url below in your web browser.
 ```
-http://localhost:8081/#/login
+http://localhost:5050
 ```
-- The default username and password are both `admin`.
-- Once logged in, click on the white tab with the `default` header. 
-- In the menu of items on the left sidebar, scroll down and click the `Try Me!` tab.
-- On the right hand side, under the Subscriber Header, Click on the `Connect` button.
-- In the same section, enter the topic `Topic/Person/Add` in the input box currently containing the phrase `try-me` (Delete this prior to adding above).
-- Click the Subscribe button.
-- Heading back to the terminal used to set up the application, enter the command below.
+- Login using the credentials below.
+```json
+{
+    "username/email": "admin@admin.com",
+    "password": "admin"
+}
 ```
-mvn exec:java@exec-publisher
+
+- Once logged in, click the `add new server` button.
+- In the `Name` input field, input `Postgres DB`.
+- Click on `connections` in the top menu.
+- In the `Host name /address` name field, input `db`.
+- In the password field, input `admin`.
+- Click the `save` button.
+- On the left panel, navigate to `Postgres DB -> Databases -> admin`.
+- In the top menu, click on `Tools -> Query Tool`.
+- In the now created query box, input the SQL command below.
+```sql
+SELECT * FROM users;
 ```
-- Your terminal should display a list of individuals that have been successfully published to any listeners.
-- Heading back to the Solace GUI, you should now notice a list of published users in the subscriber tab.
+- The query should output all the users who have been successfully added the database.
+
+
