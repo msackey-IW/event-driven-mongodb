@@ -29,7 +29,7 @@ git clone git@github.com:msackey-IW/event-driven-user-service.git
 - Alternatively, in the [project repository](https://github.com/msackey-IW/event-driven-user-service) you can navigate to `code -> Open with GitHub Desktop` and clone the repository through GitHub Desktop.
 - Run the code snippet below in the terminal.
 ```powershell
-cd event-driven-user-service
+cd event-driven-user-service\event-driven-user-service
 ```
 - Run the code snippet below in your terminal.
 ```powershell
