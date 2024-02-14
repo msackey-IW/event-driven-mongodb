@@ -1,6 +1,5 @@
 package com.api.eventdrivenuserservice.exception;
 
-
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -33,6 +32,4 @@ public class ExceptionResponse {
     public void setMessage(List<String> message) {
         this.message = message;
     }
-
-
 }

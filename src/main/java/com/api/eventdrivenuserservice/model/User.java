@@ -1,19 +1,20 @@
 package com.api.eventdrivenuserservice.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-
-
 
 @Getter
 @Setter
 @AllArgsConstructor
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
 @Entity
@@ -43,4 +44,5 @@ public class User {
         return user.firstName + "," + user.lastName + "," + user.age + "," + user.sex;
     }
 }
+
 
