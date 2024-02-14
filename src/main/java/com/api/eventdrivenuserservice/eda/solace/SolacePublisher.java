@@ -9,6 +9,4 @@ public class SolacePublisher {
     public void publish(String topic, String message, MessageProducer messageProducer, Session session) throws JMSException {
         messageProducer.send(session.createTopic(topic), session.createTextMessage(message));
     }
-
-
 }

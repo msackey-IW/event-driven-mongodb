@@ -1,7 +1,6 @@
 package com.api.eventdrivenuserservice.web;
 
-import org.apache.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +20,13 @@ public class UserController {
 
     @PostMapping("/add")
     public ResponseEntity<User> addUser(@Valid User user) {
-        solaceAdapter.publishMessage("Topic/User/Add", user.toString());
-        return new ResponseEntity<>(user, HttpStatus.SC_OK);
-     
-
+        try {
+            solaceAdapter.publishMessage("Topic/User/Add", user.toString());
+            return ResponseEntity.ok(user);
+        } catch(Exception e) {
+            // Log the exception or handle it appropriately
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
     }
+    
 }
