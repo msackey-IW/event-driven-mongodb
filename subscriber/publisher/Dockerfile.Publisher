@@ -1,0 +1,11 @@
+# Stage 1: Build the Java microservice
+FROM khipu/openjdk17-alpine AS builder
+
+WORKDIR /app
+
+COPY . .
+
+CMD ["./mvnw", "exec:java@publisher"]
+
+
+
