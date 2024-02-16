@@ -39,4 +39,6 @@ public class User {
     @NonNull
     @Column(name = "sex")
     private String sex;
+
+
 }

@@ -27,8 +27,6 @@ public class UserEventPublisherAdapter {
         connectionFactory.setUsername(username);
         connectionFactory.setPassword(password);
         return connectionFactory;
-
-   
     }
 
 }
