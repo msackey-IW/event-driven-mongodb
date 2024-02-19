@@ -1,16 +1,16 @@
 version: '3.3'
 
 services:
-  publisher:
-    build:
-      context: ./
-      dockerfile: ./Dockerfile.Publisher
-    restart: on-failure
-    ports:
-      - "9090:9090"
-    depends_on:
-      - db
-      - subscriber
+  #publisher:
+    #build:
+      #context: ./publisher/
+      #dockerfile: ./Dockerfile.Publisher
+    #restart: on-failure
+    #ports:
+      #- "9090:9090"
+    #depends_on:
+     # - db
+      #- subscriber
 
   db:
     image: 'postgres:13.1-alpine'
@@ -37,7 +37,7 @@ services:
 
   subscriber:
       build:
-        context: ./
+        context: ./subscriber/
         dockerfile: ./Dockerfile.Subscriber
       restart: on-failure
       environment:
@@ -45,8 +45,6 @@ services:
         SPRING_DATASOURCE_USERNAME: admin
         SPRING_DATASOURCE_PASSWORD: admin
         SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      ports:
-        - "8080:8080"
       depends_on:
         - db
       
@@ -89,13 +87,13 @@ services:
       #MQTT Default VPN over TLS
       - '8883:8883'
       #SEMP / PubSub+ Manager
-      - '8081:8080'
+      - '8080:8080'
       #REST Default VPN
       - '9000:9000'
       #REST Default VPN over TLS
       - '9443:9443'
       #SMF
-      - '55554:55555'
+      - '55555:55555'
       #SMF over TLS
       - '55443:55443'
       #SSH connection to CLI
@@ -104,6 +102,14 @@ services:
       - username_admin_globalaccesslevel=admin
       - username_admin_password=admin
       - system_scaling_maxconnectioncount=100
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+      start_interval: 5s
+
 networks:
   app-net:
 

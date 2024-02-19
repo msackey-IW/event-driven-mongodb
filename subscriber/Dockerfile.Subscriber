@@ -1,8 +1,4 @@
-# Stage 1: Build the Java microservice
-FROM khipu/openjdk17-alpine AS builder
-
-WORKDIR /app
-
-COPY . .
-
-CMD ["./mvnw", "clean", "spring-boot:run"]
+FROM eclipse-temurin:17-jre-jammy
+WORKDIR /opt/app
+COPY target/*.jar /app/*.jar
+ENTRYPOINT ["java", "-jar", "/app/*.jar"]
