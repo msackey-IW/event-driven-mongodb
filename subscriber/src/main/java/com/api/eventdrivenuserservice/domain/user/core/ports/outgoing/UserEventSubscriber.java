@@ -24,8 +24,9 @@ import org.springframework.jms.annotation.EnableJms;
 public class UserEventSubscriber {
     AddNewUser addNewUser;
     
-    @JmsListener(destination = "Q/users/add")
+    @JmsListener(destination ="MyUsersQ")
     public void handle(Message message){
+        System.out.println("Message Received!");
                 try {
                     if (message instanceof MapMessage) {
                         MapMessage mapMessage = ((MapMessage) message);

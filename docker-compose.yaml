@@ -1,16 +1,26 @@
 version: '3.3'
 
 services:
-  #publisher:
-    #build:
-      #context: ./publisher/
-      #dockerfile: ./Dockerfile.Publisher
-    #restart: on-failure
-    #ports:
-      #- "9090:9090"
-    #depends_on:
-     # - db
-      #- subscriber
+  publisher:
+    build:
+      context: ./publisher/
+      dockerfile: ./Dockerfile.Publisher
+    restart: on-failure
+    ports:
+        - "9090:9090"
+    depends_on:
+      - db
+      - subscriber
+
+  solace-init:
+    build:
+      context: ./solace/
+      dockerfile: Dockerfile
+    container_name: solace-init
+    restart: "no"
+    depends_on:
+      solace:
+        condition: service_healthy
 
   db:
     image: 'postgres:13.1-alpine'
@@ -22,7 +32,9 @@ services:
     volumes:
       - db:/var/lib/postgres
     depends_on:
-      - solace
+      solace-init:
+        condition: service_completed_successfully
+
   
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -47,13 +59,14 @@ services:
         SPRING_JPA_HIBERNATE_DDL_AUTO: update
       depends_on:
         - db
+    
       
       
   solace:
     container_name: solace
     image: solace/solace-pubsub-standard:latest
     volumes:
-      - "storage-group:/var/lib/solace"
+      - "solace:/var/lib/solace"
     shm_size: 1g
     ulimits:
       core: -1
@@ -93,11 +106,13 @@ services:
       #REST Default VPN over TLS
       - '9443:9443'
       #SMF
-      - '55555:55555'
+      - 55554:55555
+      #SMF Compressed
+      - 55050:55003
       #SMF over TLS
-      - '55443:55443'
+      - 55443:55443
       #SSH connection to CLI
-      - '2222:2222'
+      - 2222:2222
     environment:
       - username_admin_globalaccesslevel=admin
       - username_admin_password=admin
@@ -117,3 +132,4 @@ networks:
 volumes:
   db:
   storage-group:
+  solace:
