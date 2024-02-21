@@ -24,24 +24,28 @@ cd path/to/your/directory
 ```
 - Run 
 ```powershell
-git clone git@github.com:msackey-IW/event-driven-user-service.git
+git clone git@github.com:msackey-IW/event-driven-web-user-service.git
 ```
-- Alternatively, in the [project repository](https://github.com/msackey-IW/event-driven-user-service) you can navigate to `code -> Open with GitHub Desktop` and clone the repository through GitHub Desktop.
+- Alternatively, in the [project repository](https://github.com/msackey-IW/event-driven-web-user-service) you can navigate to `code -> Open with GitHub Desktop` and clone the repository through GitHub Desktop.
 - Run the code snippet below in the terminal.
 ```powershell
-cd event-driven-user-service
+cd event-driven-web-user-service
 ```
 - Run the code snippet below in your terminal.
 ```powershell
 docker-compose up -d
 ```
 - The above command creates 2 event driven microservices(publisher and subscriber), solace, a postgeSQL database and pgAdmin to access the postgres db. 
-- The publisher fires a list of user details to the topic `Topic/People/Add` to which the consumer subscribes.
+- The publisher fires a list of user details to the topic `Q/Users/Add` to which the consumer subscribes.
 - The subscriber then takes all the data and persists it in the posgresSQL database.
 - Due to the size fo the images, the application may take some time to get up and running. Allow for up to 10 minutes.
 
 ## TESTING THE APPLICATION
-
+- Open POstman API
+- Navigate to  `menu -> file -> import`
+- Upload the JSON file in the postman folder in the main directory.
+- Open and `Add Person To Database` request and press send.
+- The above publishes a post request to  add a person to the database which the subscriber can access.
 - Open the pgAdmin graphical user interface by navigating to the url below in your web browser.
 ```
 http://localhost:5050
@@ -71,5 +75,4 @@ SELECT * FROM users;
   ```bash
   docker-compose down
   ```
-
 
