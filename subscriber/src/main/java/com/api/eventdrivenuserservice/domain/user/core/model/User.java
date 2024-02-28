@@ -1,6 +1,8 @@
 package com.api.eventdrivenuserservice.domain.user.core.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,33 +12,26 @@ import lombok.Setter;
 import lombok.ToString;
 
 @ToString(exclude = "id")
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
-@Table(name = "users")
+@Document("users")
 
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    private String id;
 
     @NonNull
-    @Column(name = "firstName")
     private String firstName;
 
     @NonNull
-    @Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "age")
     private int age;
 
     @NonNull
-    @Column(name = "sex")
     private String sex;
 }

@@ -9,7 +9,7 @@ services:
     ports:
         - "9090:9090"
     depends_on:
-      - db
+      - mongodb
       - subscriber
 
   solace-init:
@@ -21,47 +21,54 @@ services:
     depends_on:
       solace:
         condition: service_healthy
-
-  db:
-    image: 'postgres:13.1-alpine'
-    restart: always
-    container_name: db
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-    volumes:
-      - db:/var/lib/postgres
-    depends_on:
-      solace-init:
-        condition: service_completed_successfully
-
   
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "5050:80"
-    depends_on:
-      - db
-
   subscriber:
       build:
         context: ./subscriber/
         dockerfile: ./Dockerfile.Subscriber
       restart: on-failure
       environment:
-        SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/admin
-        SPRING_DATASOURCE_USERNAME: admin
-        SPRING_DATASOURCE_PASSWORD: admin
-        SPRING_JPA_HIBERNATE_DDL_AUTO: update
+        - SPRING_DATA_MONGODB_URI=mongodb://root:example@host.docker.internal:27017/users?authSource=admin
       depends_on:
-        - db
-    
-      
-      
+        - mongodb
+        - solace
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    depends_on:
+      solace:
+        condition: service_healthy
+    networks:
+      - mongo-db
+    volumes:
+      - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
+      - mongodb_data:/data/db
+
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: example
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongodb:27017/users?authSource=admin
+    depends_on:
+      - mongodb
+    networks:
+      - mongo-db
+
   solace:
     container_name: solace
     image: solace/solace-pubsub-standard:latest
@@ -127,9 +134,11 @@ services:
 
 networks:
   app-net:
+  mongo-db:
 
 
 volumes:
-  db:
+  mongodb:
   storage-group:
   solace:
+  mongodb_data:

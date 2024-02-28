@@ -6,7 +6,6 @@ import com.api.eventdrivenuserservice.domain.user.core.ports.incoming.AddNewUser
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 
-import jakarta.jms.TextMessage;
 
 import com.solacesystems.jms.SolJmsUtility;
 import jakarta.jms.MapMessage;
@@ -51,7 +50,5 @@ public class UserEventSubscriber {
                     System.out.println("Error processing incoming message.");
                     ex.printStackTrace();
                 }
-            }
-        
-
+    }
 }

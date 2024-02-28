@@ -1,6 +1,5 @@
 package com.api.eventdrivenuserservice.domain.user.core.model;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,7 @@ import lombok.ToString;
 public class User {
 
 
-    private Long id;
+    private String id;
 
     @NonNull
     private String firstName;
@@ -30,6 +29,5 @@ public class User {
 
     @NonNull
     private String sex;
-
 
 }
