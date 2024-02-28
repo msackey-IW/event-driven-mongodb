@@ -46,9 +46,9 @@ docker-compose up -d
 - Upload the JSON file in the postman folder in the main directory.
 - Open and `Add Person To Database` request and press send.
 - The above publishes a post request to  add a person to the database which the subscriber can access.
-- Open the pgAdmin graphical user interface by navigating to the url below in your web browser.
+- Open the MongoDB graphical user interface by navigating to the url below in your web browser.
 ```
-http://localhost:5050
+http://localhost:8081
 ```
 - Login using the credentials below.
 ```json
@@ -59,18 +59,8 @@ http://localhost:5050
 ```
 
 - Once logged in, click the `users` button.
-- In the `Name` input field, input `Postgres DB`.
-- Click on `connections` in the top menu.
-- In the `Host name /address` name field, input `db`.
-- In the password field, input `admin`.
-- Click the `save` button.
-- On the left panel, navigate to `Postgres DB -> Databases -> admin`.
-- In the top menu, navigate to `Tools -> Query Tool`.
-- In the now created query box, input the SQL command below.
-```sql
-SELECT * FROM users;
-```
-- The query should output all the users who have been successfully added the database.
+- Click the `view` button.
+- You should now have access to all the users added to the database.
 - Run the command below to close down all running docker containers.
   ```bash
   docker-compose down
