@@ -1,7 +1,7 @@
 # EVENT DRIVEN USER INFORMATION SERVICE
 
 ## ABOUT THE SERVICE
-This repository uses event driven architecture to allow users to be added to a database. A publisher microservice fires a series of messages containing the details of an individual to the event broker(solace), after which subscriber service will pick up the data and add it to database. 
+This repository uses event driven architecture to allow users to be added to a MongoDB - a document based database. A publisher microservice fires a series of messages containing the details of an individual to the event broker(solace), after which subscriber service will pick up the data and add it to MongoDB. 
 
 ## SOLACE
 Solace is an event broker that enables message-oriented middleware services that routes information between applications, devices and user interfaces. Learn more about solace and how it functions by visiting their [official docs](https://docs.solace.com/).
@@ -53,12 +53,12 @@ http://localhost:5050
 - Login using the credentials below.
 ```json
 {
-    "username/email": "admin@admin.com",
-    "password": "admin"
+    "username/email": "admin",
+    "password": "example"
 }
 ```
 
-- Once logged in, click the `add new server` button.
+- Once logged in, click the `users` button.
 - In the `Name` input field, input `Postgres DB`.
 - Click on `connections` in the top menu.
 - In the `Host name /address` name field, input `db`.
